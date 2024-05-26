@@ -1,4 +1,4 @@
-import { createService, findAllService, findByIdService } from '../services/user.service.js';
+import { createService, findAllService, findByIdService, updateService } from '../services/user.service.js';
 
 export const register = async (req, res) => {
     try {
@@ -51,6 +51,26 @@ export const findById = async (req, res) => {
         res.status(200).send({
             message: 'User found successfully',
             user
+        });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const update = async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'Please fill all fields' });
+        }
+
+        const { id, user } = req;
+
+        await updateService(id, name, email, password);
+
+        res.status(200).send({
+            message: 'User updated'
         });
     } catch (error) {
         res.status(500).send({ message: error.message });
