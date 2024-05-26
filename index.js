@@ -1,14 +1,14 @@
 import express from 'express';
 
+import userRoute from './src/routes/user.route.js';
+
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-}
-);
+app.use(express.json());
+app.use('/api/users', userRoute);
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 }
 );
