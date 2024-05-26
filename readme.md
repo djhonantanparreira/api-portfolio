@@ -27,7 +27,7 @@ API criada para o portfólio de projetos, com o intuito de mostrar as habilidade
 ## Funcionalidades
 
 Back-end:
-- [ ] Cadastro de usuários
+- [x] Cadastro de usuários
 - [ ] Autenticação de usuários
 - [ ] Adicionar, editar e excluir projetos (apenas administrador)
 - [ ] Adicionar, editar e excluir comentários (apenas usuário)
