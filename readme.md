@@ -64,6 +64,7 @@ Para autenticação de usuários, será utilizado o JWT (JSON Web Token), onde o
 - Registrar: POST /api/users/register
 - Login: POST /api/users/login
 - Exibir todos usuário: GET /api/users
+- Buscar um usuário: GET /api/users/:id
 - Perfil: GET /api/users/profile
 - Atualizar perfil: PUT /api/users/profile
 

@@ -1,4 +1,4 @@
-import { createService, findAllService } from '../services/user.service.js';
+import { createService, findAllService, findByIdService } from '../services/user.service.js';
 
 export const register = async (req, res) => {
     try {
@@ -38,6 +38,19 @@ export const findAll = async (req, res) => {
         res.status(200).send({
             message: 'Users found successfully',
             users
+        });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const findById = async (req, res) => {
+    try {
+        const user = req.user;
+
+        res.status(200).send({
+            message: 'User found successfully',
+            user
         });
     } catch (error) {
         res.status(500).send({ message: error.message });
