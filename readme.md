@@ -28,7 +28,7 @@ API criada para o portfólio de projetos, com o intuito de mostrar as habilidade
 
 Back-end:
 - [x] Cadastro de usuários
-- [ ] Autenticação de usuários
+- [x] Autenticação de usuários
 - [ ] Adicionar, editar e excluir projetos (apenas administrador)
 - [ ] Adicionar, editar e excluir comentários (apenas usuário)
 - [ ] Curtir e descurtir projetos (apenas usuário)
@@ -63,6 +63,7 @@ Para autenticação de usuários, será utilizado o JWT (JSON Web Token), onde o
 ### Usuários
 - Registrar: POST /api/users/register
 - Login: POST /api/users/login
+- Exibir todos usuário: GET /api/users
 - Perfil: GET /api/users/profile
 - Atualizar perfil: PUT /api/users/profile
 
