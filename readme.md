@@ -30,7 +30,7 @@ Back-end:
 - [x] Cadastro de usuários
 - [x] Autenticação de usuários
 - [x] Atualização de dados do usuário
-- [ ] Adicionar, editar e excluir projetos (apenas administrador)
+- [x] Adicionar projetos (apenas administrador)
 - [ ] Adicionar, editar e excluir comentários (apenas usuário)
 - [ ] Curtir e descurtir projetos (apenas usuário)
 - [ ] Curtir e descurtir comentários (apenas usuário)
