@@ -65,7 +65,7 @@ Back-end:
 - [x] Login de usuários
 - [x] Cadastro de projetos
 - [x] Edição de projetos
-- [ ] Exclusão de projetos
+- [x] Exclusão de projetos
 - [ ] Curtir projetos
 - [ ] Comentar projetos
 

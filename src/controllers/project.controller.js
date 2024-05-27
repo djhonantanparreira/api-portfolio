@@ -1,4 +1,4 @@
-import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService } from '../services/project.service.js';
+import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService, deleteProjectService } from '../services/project.service.js';
 
 export const createProject = async (req, res) => {
     try {
@@ -123,6 +123,24 @@ export const updateProject = async (req, res) => {
         await updateProjectService(id, title, description, technologies, link, image);
 
         return res.send({ message: 'Project updated!' });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const deleteProject = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const project = await findByIdProjectService(id);
+
+        if (String(project.user._id) !== req.userId) {
+            return res.status(403).json({ message: 'You are not allowed to delete this project' });
+        }
+
+        await deleteProjectService(id);
+
+        return res.send({ message: 'Project deleted!' });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }

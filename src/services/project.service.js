@@ -13,3 +13,5 @@ export const updateProjectService = (id, title, description, technologies, link,
     { title, description, technologies, link, image },
     { rawResult: true }
 );
+
+export const deleteProjectService = (id) => Project.findByIdAndDelete({ _id: id });
