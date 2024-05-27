@@ -62,20 +62,12 @@ api-portfolio
 
 Back-end:
 - [x] Cadastro de usuários
-- [x] Autenticação de usuários
-- [x] Atualização de dados do usuário
-- [x] Listar todos os usuários
-- [x] Adicionar projetos (apenas administrador)
-- [x] Listar todos os projetos
-- [ ] Atualizar projetos (apenas administrador)
-- [ ] Excluir projetos (apenas administrador)
-- [ ] Curtir projetos (somente logado)
-- [ ] Descurtir projetos (somente logado)
-- [ ] Comentar projetos (somente logado)
-- [ ] Atualizar comentários (somente logado)
-- [ ] Excluir comentários (somente logado)
-- [ ] Curtir comentários (somente logado)
-- [ ] Descurtir comentários (somente logado)
+- [x] Login de usuários
+- [x] Cadastro de projetos
+- [x] Edição de projetos
+- [ ] Exclusão de projetos
+- [ ] Curtir projetos
+- [ ] Comentar projetos
 
 ## Observações
 
@@ -112,7 +104,13 @@ Para autenticação de usuários, será utilizado o JWT (JSON Web Token), onde o
 
 - [x] POST /api/auth/login
 
-### Projetos (Apenas administrador)
+### Projetos
 
-- [x] POST /api/projects
-- [x] GET /api/projects
+- [x] POST /api/projects *Apenas administrador*
+- [x] GET /api/projects 
+- [x] GET /api/projects/:id *Apenas administrador*
+- [ ] PATCH /api/projects/:id *Apenas administrador*
+- [ ] DELETE /api/projects/:id *Apenas administrador*
+- [ ] PATCH /api/projects/like/:id *Somente logado*
+- [ ] PATCH /api/projects/comment/:id *Somente logado*
+- [ ] PATCH /api/projects/:idProject/:idComment *Somente logado*

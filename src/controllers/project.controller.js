@@ -1,4 +1,4 @@
-import { createProjectService, findAllProjectsService, countProjectsService, findByIdService } from '../services/project.service.js';
+import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService } from '../services/project.service.js';
 
 export const createProject = async (req, res) => {
     try {
@@ -47,12 +47,17 @@ export const findAllProjects = async (req, res) => {
 
         const projects = await findAllProjectsService(offset, limit);
         const total = await countProjectsService();
+        const currentUrl = req.baseUrl;
 
         const next = offset + limit;
-        const nextUrl = next < total ? `${currentURL}?limit=${limit}&offset=${next}` : null;
+        const nextUrl =
+            next < total ? `${currentUrl}?limit=${limit}&offset=${next}` : null;
 
-        const prev = offset - limit < 0 ? null : offset - limit;
-        const prevUrl = prev !== null ? `${currentURL}?limit=${limit}&offset=${prev}` : null;
+        const previous = offset - limit < 0 ? null : offset - limit;
+        const previousUrl =
+            previous != null
+                ? `${currentUrl}?limit=${limit}&offset=${previous}`
+                : null;
 
         if (!projects) {
             return res.status(404).json({ message: 'Projects not found' });
@@ -60,7 +65,7 @@ export const findAllProjects = async (req, res) => {
 
         res.status(200).json({
             nextUrl,
-            prevUrl,
+            previousUrl,
             limit,
             offset,
             total,
@@ -79,11 +84,11 @@ export const findAllProjects = async (req, res) => {
     }
 }
 
-export const findById = async (req, res) => {
+export const findByIdProject = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const project = await findByIdService(id);
+        const project = await findByIdProjectService(id);
 
         return res.send({
             project: {
@@ -95,6 +100,29 @@ export const findById = async (req, res) => {
                 image: project.image
             }
         })
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const updateProject = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, description, technologies, link, image } = req.body;
+
+        if (!title && !description && !technologies && !link && !image) {
+            return res.status(400).json({ message: 'Submit at least one field to update' });
+        }
+
+        const project = await findByIdProjectService(id);
+
+        if (String(project.user._id) !== req.userId) {
+            return res.status(403).json({ message: 'You are not allowed to update this project' });
+        }
+
+        await updateProjectService(id, title, description, technologies, link, image);
+
+        return res.send({ message: 'Project updated!' });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }

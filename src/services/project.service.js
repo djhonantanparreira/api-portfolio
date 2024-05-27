@@ -6,4 +6,10 @@ export const findAllProjectsService = (offset, limit) => Project.find().sort({ c
 
 export const countProjectsService = () => Project.countDocuments();
 
-export const findByIdService = (id) => Project.findById(id).populate('user');
+export const findByIdProjectService = (id) => Project.findById(id).populate('user');
+
+export const updateProjectService = (id, title, description, technologies, link, image) => Project.findOneAndUpdate(
+    { _id: id },
+    { title, description, technologies, link, image },
+    { rawResult: true }
+);
