@@ -33,3 +33,7 @@ export const addCommentProjectService = async (idProject, userId, comment) => {
         { $push: { comments: { idComment, userId, comment, createdAt: new Date() } } }
     );
 }
+
+export const delCommentProjectService = async (idProject, idComment, userId) => Project.findOneAndUpdate(
+    { _id: idProject },
+    { $pull: { comments: { idComment, userId } } });

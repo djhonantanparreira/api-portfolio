@@ -113,4 +113,4 @@ Para autenticação de usuários, será utilizado o JWT (JSON Web Token), onde o
 - [x] DELETE /api/projects/:id *Apenas administrador*
 - [x] PATCH /api/projects/like/:id *Somente logado*
 - [x] PATCH /api/projects/comment/:id *Somente logado*
-- [ ] PATCH /api/projects/:idProject/:idComment *Somente logado*
+- [x] PATCH /api/projects/:idProject/:idComment *Somente logado*

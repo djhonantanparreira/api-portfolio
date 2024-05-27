@@ -1,4 +1,4 @@
-import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService, deleteProjectService, likeProjectService, unlikeProjectService, addCommentProjectService } from '../services/project.service.js';
+import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService, deleteProjectService, likeProjectService, unlikeProjectService, addCommentProjectService, delCommentProjectService } from '../services/project.service.js';
 
 export const createProject = async (req, res) => {
     try {
@@ -184,6 +184,27 @@ export const addCommentProject = async (req, res) => {
         await addCommentProjectService(id, userId, comment);
 
         res.send({ message: 'Comment added!' });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const delCommentProject = async (req, res) => {
+    try {
+        const { idProject, idComment } = req.params;
+        const userId = req.userId;
+
+        const commentDeleted = await delCommentProjectService(idProject, idComment, userId);
+
+        const commentFinder = commentDeleted.comments.find(
+            (comment) => comment.idComment === idComment && String(comment.userId) === userId
+        )
+
+        if (!commentFinder) {
+            return res.status(403).json({ message: 'You are not allowed to delete this comment' });
+        }
+
+        return res.send({ message: 'Comment deleted!' })
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
