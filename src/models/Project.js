@@ -1,30 +1,44 @@
 import mongoose from "mongoose";
 
-const commentSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    technologies: {
+        type: [String],
+        required: true
+    },
+    link: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: [true, "User is required"]
+        required: true
     },
-    text: {
-        type: String,
-        required: [true, "Text is required"]
+    likes: {
+        type: Array,
+        require: true
     },
-    likes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }]
-}, { timestamps: true });
-
-const projectSchema = new mongoose.Schema({
-    title: {},
-    description: {},
-    technologies: {},
-    link: {},
-    image: {},
-    likes: {},
-    comments: [commentSchema]
-}, { timestamps: true });
+    comments: {
+        type: Array,
+        require: true
+    }
+});
 
 const Project = mongoose.model("Project", projectSchema);
 

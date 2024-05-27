@@ -24,31 +24,70 @@ API criada para o portfólio de projetos, com o intuito de mostrar as habilidade
 - Heroku
 - Netlify
 
+## Estrutura de pastas
+
+```
+api-portfolio
+├── src
+│   ├── controllers
+│   │   ├── auth.controller.js
+│   │   ├── project.controller.js
+│   │   └── user.controller.js
+│   ├── database
+│   │   └── db.js
+│   ├── middlewares
+│   │   └── admin.middlewares.js
+|   |   └── auth.middlewares.js
+|   |   └── global.middlewares.js
+│   ├── models
+│   │   ├── Project.js
+│   │   └── User.js
+│   ├── routes
+│   │   ├── auth.routes.js
+│   │   ├── project.routes.js
+│   │   └── user.routes.js
+│   ├── services
+│   │   ├── auth.services.js
+│   │   ├── project.services.js
+│   │   └── user.services.js
+├── .env
+├── .gitignore
+|── index.js
+├── package-lock.json
+├── package.json
+└── README.md
+```
+
 ## Funcionalidades
 
 Back-end:
 - [x] Cadastro de usuários
 - [x] Autenticação de usuários
 - [x] Atualização de dados do usuário
+- [x] Listar todos os usuários
 - [x] Adicionar projetos (apenas administrador)
-- [ ] Adicionar, editar e excluir comentários (apenas usuário)
-- [ ] Curtir e descurtir projetos (apenas usuário)
-- [ ] Curtir e descurtir comentários (apenas usuário)
-- [ ] Listar projetos
-- [ ] Listar comentários de um projeto
-
-Front-end:
-- [ ] Home page (Hero, sobre, tecnologias, contato)
-- [ ] Página de projetos (listagem de projetos)
-- [ ] Página de projeto (detalhes do projeto)
-- [ ] Página de login
-- [ ] Página de cadastro
-- [ ] Página de perfil (editar dados)
-- [ ] Página de administração (adicionar, editar e excluir projetos)
+- [x] Listar todos os projetos
+- [ ] Atualizar projetos (apenas administrador)
+- [ ] Excluir projetos (apenas administrador)
+- [ ] Curtir projetos (somente logado)
+- [ ] Descurtir projetos (somente logado)
+- [ ] Comentar projetos (somente logado)
+- [ ] Atualizar comentários (somente logado)
+- [ ] Excluir comentários (somente logado)
+- [ ] Curtir comentários (somente logado)
+- [ ] Descurtir comentários (somente logado)
 
 ## Observações
 
 Por se tratar de um projeto pessoal, não terá mais de um administrador, apenas um usuário administrador que terá permissão para adicionar, editar e excluir projetos.
+
+Para você testar a API, você deve fazer um fork do projeto e criar um arquivo .env na raiz do projeto com as seguintes variáveis de ambiente:
+
+```
+PORT=3000
+MONGODB_URI=URL_DO_SEU_BANCO_DE_DADOS
+JWT_SECRET=SEU_JWT_SECRET
+```
 
 ## Autenticação
 
@@ -61,54 +100,19 @@ Para autenticação de usuários, será utilizado o JWT (JSON Web Token), onde o
 - Visitante: poderá apenas visualizar os projetos e os comentários
 
 ## Rotas
+
 ### Usuários
-- Registrar: POST /api/users/register
-- Login: POST /api/users/login
-- Exibir todos usuário: GET /api/users
-- Buscar um usuário: GET /api/users/:id
-- Atualizar perfil: PATCH /api/users/:id
 
-### Projetos
-- Listar todos: GET /api/projects
-- Listar um: GET /api/projects/:id
-- Adicionar: POST /api/projects (administrador)
-- Atualizar: PUT /api/projects/:id (administrador)
-- Excluir: DELETE /api/projects/:id (administrador)
-- Curtir: PUT /api/projects/like/:id
-- Descurtir: PUT /api/projects/unlike/:id
-- Comentar: POST /api/projects/comment/:id
-- Atualizar comentário: PUT /api/projects/comment/:id/:comment_id
-- Excluir comentário: DELETE /api/projects/comment/:id/:comment_id
-- Curtir comentário: PUT /api/projects/comment/like/:id/:comment_id
-- Descurtir comentário: PUT /api/projects/comment/unlike/:id/:comment_id
-- Listar comentários de um projeto: GET /api/projects/comments/:id
+- [x] POST /api/users/register
+- [x] GET /api/users
+- [x] GET /api/users/:id
+- [x] PATCH /api/users/:id
 
-## Schemas
+### Autenticação
 
-### User
-```json
-{
-  "name": "string",
-  "email": "string",
-  "password": "string",
-  "role": "string"
-}
-```
+- [x] POST /api/auth/login
 
-### Project
-```json
-{
-  "title": "string",
-  "description": "string",
-  "technologies": ["string"],
-  "image": "string",
-  "likes": ["string"],
-  "comments": [
-    {
-      "user": "string",
-      "text": "string",
-      "likes": ["string"]
-    }
-  ]
-}
-```
+### Projetos (Apenas administrador)
+
+- [x] POST /api/projects
+- [x] GET /api/projects

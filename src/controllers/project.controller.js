@@ -1,4 +1,4 @@
-import { createProjectService, findAllProjectsService, countProjectsService } from '../services/project.service.js';
+import { createProjectService, findAllProjectsService, countProjectsService, findByIdService } from '../services/project.service.js';
 
 export const createProject = async (req, res) => {
     try {
@@ -74,6 +74,27 @@ export const findAllProjects = async (req, res) => {
                 user: project.user
             }))
         });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const findById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const project = await findByIdService(id);
+
+        return res.send({
+            project: {
+                id: project.id,
+                title: project.title,
+                description: project.description,
+                technologies: project.technologies,
+                link: project.link,
+                image: project.image
+            }
+        })
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
