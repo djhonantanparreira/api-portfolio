@@ -15,3 +15,13 @@ export const updateProjectService = (id, title, description, technologies, link,
 );
 
 export const deleteProjectService = (id) => Project.findByIdAndDelete({ _id: id });
+
+export const likeProjectService = async (idProject, userId) => Project.findOneAndUpdate(
+    { _id: idProject, "likes.userId": { $nin: [userId] } },
+    { $push: { likes: { userId, createdAt: new Date() } } }
+);
+
+export const unlikeProjectService = async (idProject, userId) => Project.findOneAndUpdate(
+    { _id: idProject },
+    { $pull: { likes: { userId } } }
+);

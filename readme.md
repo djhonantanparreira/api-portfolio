@@ -66,7 +66,7 @@ Back-end:
 - [x] Cadastro de projetos
 - [x] Edição de projetos
 - [x] Exclusão de projetos
-- [ ] Curtir projetos
+- [x] Curtir projetos/deixar de curtir projetos
 - [ ] Comentar projetos
 
 ## Observações

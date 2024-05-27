@@ -1,4 +1,4 @@
-import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService, deleteProjectService } from '../services/project.service.js';
+import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService, deleteProjectService, likeProjectService, unlikeProjectService } from '../services/project.service.js';
 
 export const createProject = async (req, res) => {
     try {
@@ -76,7 +76,10 @@ export const findAllProjects = async (req, res) => {
                 technologies: project.technologies,
                 link: project.link,
                 image: project.image,
-                user: project.user
+                createdAt: project.createdAt,
+                user: project.user,
+                likes: project.likes,
+                comments: project.comments
             }))
         });
     } catch (error) {
@@ -97,7 +100,11 @@ export const findByIdProject = async (req, res) => {
                 description: project.description,
                 technologies: project.technologies,
                 link: project.link,
-                image: project.image
+                image: project.image,
+                createdAt: project.createdAt,
+                user: project.user,
+                likes: project.likes,
+                comments: project.comments
             }
         })
     } catch (error) {
@@ -141,6 +148,24 @@ export const deleteProject = async (req, res) => {
         await deleteProjectService(id);
 
         return res.send({ message: 'Project deleted!' });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const likeProject = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.userId;
+
+        const projectLiked = await likeProjectService(id, userId);
+
+        if (!projectLiked) {
+            await unlikeProjectService(id, userId);
+            return res.send({ message: 'Project unliked!' });
+        }
+
+        res.send({ message: 'Project liked!' });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
