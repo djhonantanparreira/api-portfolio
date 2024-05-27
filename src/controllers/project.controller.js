@@ -1,4 +1,4 @@
-import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService, deleteProjectService, likeProjectService, unlikeProjectService } from '../services/project.service.js';
+import { createProjectService, findAllProjectsService, countProjectsService, findByIdProjectService, updateProjectService, deleteProjectService, likeProjectService, unlikeProjectService, addCommentProjectService } from '../services/project.service.js';
 
 export const createProject = async (req, res) => {
     try {
@@ -166,6 +166,24 @@ export const likeProject = async (req, res) => {
         }
 
         res.send({ message: 'Project liked!' });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+export const addCommentProject = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.userId;
+        const { comment } = req.body;
+
+        if (!comment) {
+            return res.status(400).json({ message: 'Write a message to comment!' });
+        }
+
+        await addCommentProjectService(id, userId, comment);
+
+        res.send({ message: 'Comment added!' });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }

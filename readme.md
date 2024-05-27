@@ -67,7 +67,7 @@ Back-end:
 - [x] Edição de projetos
 - [x] Exclusão de projetos
 - [x] Curtir projetos/deixar de curtir projetos
-- [ ] Comentar projetos
+- [x] Comentar projetos
 
 ## Observações
 
@@ -112,5 +112,5 @@ Para autenticação de usuários, será utilizado o JWT (JSON Web Token), onde o
 - [x] PATCH /api/projects/:id *Apenas administrador*
 - [x] DELETE /api/projects/:id *Apenas administrador*
 - [x] PATCH /api/projects/like/:id *Somente logado*
-- [ ] PATCH /api/projects/comment/:id *Somente logado*
+- [x] PATCH /api/projects/comment/:id *Somente logado*
 - [ ] PATCH /api/projects/:idProject/:idComment *Somente logado*

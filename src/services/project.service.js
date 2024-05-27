@@ -25,3 +25,11 @@ export const unlikeProjectService = async (idProject, userId) => Project.findOne
     { _id: idProject },
     { $pull: { likes: { userId } } }
 );
+
+export const addCommentProjectService = async (idProject, userId, comment) => {
+    const idComment = Math.floor(Date.now() * Math.random()).toString(36);
+    return Project.findOneAndUpdate(
+        { _id: idProject },
+        { $push: { comments: { idComment, userId, comment, createdAt: new Date() } } }
+    );
+}
