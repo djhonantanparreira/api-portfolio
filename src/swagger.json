@@ -10,8 +10,8 @@
     },
     "servers": [
         {
-            "url": "https://api-portfolio-t7oz.onrender.com/",
-            "description": "Production"
+            "url": "https://api-portfolio-dev.onrender.com/",
+            "description": "Production Server"
         },
         {
             "url": "http://localhost:3000",
