@@ -21,7 +21,7 @@ API criada para o portfólio de projetos, com o intuito de mostrar as habilidade
 - Visual Studio Code
 - Insomnia
 - Git e GitHub
-- Heroku
+- Render
 - Netlify
 
 ## Estrutura de pastas
