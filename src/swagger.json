@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My Portfólio API Documentation",
-        "description": "In this documentation you will be able to consult the API end-points and also test all available routes.",
+        "title": "My Portfolio API Documentation",
+        "description": "In this documentation, you can consult the API endpoints and also test all available routes.",
         "contact": {
             "email": "djhonantanparreira@gmail.com"
         },
@@ -15,14 +15,14 @@
         },
         {
             "url": "http://localhost:3000",
-            "description": "Local"
+            "description": "Local Development Server"
         }
     ],
     "paths": {
         "/api/users/register": {
             "post": {
                 "summary": "Create a new user",
-                "description": "Route responsible for creating a new user",
+                "description": "Route responsible for creating a new user.",
                 "tags": [
                     "Users"
                 ],
@@ -33,7 +33,8 @@
                                 "$ref": "#/components/schemas/User"
                             },
                             "examples": {
-                                "Users": {
+                                "example1": {
+                                    "summary": "User Example",
                                     "value": {
                                         "name": "Ursa Alemã",
                                         "email": "ursa@gmail.com",
@@ -45,27 +46,26 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "Error creating user"
-                    },
                     "201": {
-                        "description": "User registered successfully",
+                        "description": "User registered successfully.",
                         "content": {
                             "application/json": {
-                                "schemma": {
-                                    "type": "object",
+                                "schema": {
                                     "$ref": "#/components/schemas/User"
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Error creating user."
                     }
                 }
             }
         },
         "/api/users": {
             "get": {
-                "summary": "Search all users",
-                "description": "Route responsible for fetching all users",
+                "summary": "List all users",
+                "description": "Route responsible for listing all users.",
                 "tags": [
                     "Users"
                 ],
@@ -75,11 +75,8 @@
                     }
                 ],
                 "responses": {
-                    "400": {
-                        "description": "No users found"
-                    },
                     "200": {
-                        "description": "Users found successfully",
+                        "description": "List of all users.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -90,65 +87,29 @@
                                 }
                             }
                         }
-                    }
-                }
-            }
-        },
-        "/api/users/{id}": {
-            "get": {
-                "summary": "Search user by id",
-                "description": "Route responsible for searching for user by id",
-                "tags": [
-                    "Users"
-                ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "type": "string",
-                        "description": "User ID",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User found successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/User"
-                                }
-                            }
-                        }
+                    },
+                    "400": {
+                        "description": "Error listing users."
                     }
                 }
             }
         },
         "/api/users/{id}": {
             "patch": {
-                "summary": "Update user by id",
-                "description": "Route responsible for editing the user by id",
+                "summary": "Update user by ID",
+                "description": "Route responsible for updating a user.",
                 "tags": [
                     "Users"
                 ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
-                        "type": "string",
+                        "in": "path",
+                        "required": true,
                         "description": "User ID",
-                        "required": true
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -158,39 +119,42 @@
                                 "$ref": "#/components/schemas/User"
                             },
                             "examples": {
-                                "Users": {
-                                    "value": {
-                                        "name": "Djhonantan Parreira",
-                                        "email": "dev@djhonantan.com",
-                                        "password": "12345"
-                                    }
+                                "summary": "User Example",
+                                "value": {
+                                    "name": "Ursa Alemã",
+                                    "email": "ursa@gmail.com",
+                                    "password": "12345"
                                 }
                             }
-                        }
+                        },
+                        "required": [
+                            "name",
+                            "email",
+                            "password"
+                        ]
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "Please fill all fields"
-                    },
                     "200": {
-                        "description": "User updated",
+                        "description": "User updated!",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
                                     "$ref": "#/components/schemas/User"
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Please fill all fields!"
                     }
                 }
             }
         },
         "/api/auth/login": {
             "post": {
-                "summary": "Login to my portfólio website",
-                "description": "Route responsible for logging in a registered user",
+                "summary": "Login to my portfolio website",
+                "description": "Route responsible for authenticating a user.",
                 "tags": [
                     "Auth"
                 ],
@@ -201,9 +165,10 @@
                                 "$ref": "#/components/schemas/User"
                             },
                             "examples": {
-                                "User": {
+                                "example1": {
+                                    "summary": "User Example",
                                     "value": {
-                                        "email": "dev@djhonantan.com",
+                                        "email": "admin@wow.com",
                                         "password": "12345"
                                     }
                                 }
@@ -212,9 +177,6 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "Invalid email or password"
-                    },
                     "200": {
                         "content": {
                             "application/json": {
@@ -228,6 +190,9 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Invalid email or password"
                     }
                 }
             }
@@ -235,9 +200,9 @@
         "/api/projects": {
             "post": {
                 "summary": "Create a new project",
-                "description": "Route responsible for creating a new Project",
+                "description": "Route responsible for creating a new project.",
                 "tags": [
-                    "Project"
+                    "Projects"
                 ],
                 "security": [
                     {
@@ -251,21 +216,18 @@
                                 "$ref": "#/components/schemas/Project"
                             },
                             "examples": {
-                                "Project": {
+                                "example1": {
+                                    "summary": "Project Example",
                                     "value": {
-                                        "title": "",
-                                        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                                        "title": "My Portfolio",
+                                        "description": "My personal portfolio",
                                         "technologies": [
-                                            "NodeJS",
                                             "ReactJS",
-                                            "React Native"
+                                            "NodeJS",
+                                            "MongoDB"
                                         ],
-                                        "link": "localhost:3000",
-                                        "image": "https://imgur.com/Ry1cb5M",
-                                        "createdAt": "2021-08-01T00:00:00.000Z",
-                                        "user": "611f4b3b5as34df25",
-                                        "likes": [],
-                                        "comments": []
+                                        "link": "www.djhonantanparreira.com",
+                                        "image": "https://www.djhonantanparreira.com/image.png"
                                     }
                                 }
                             }
@@ -273,41 +235,30 @@
                     }
                 },
                 "responses": {
-                    "400": {
-                        "description": "Please fill all fields"
-                    },
-                    "500": {
-                        "description": "Error creating project"
-                    },
                     "201": {
-                        "description": "Project created successfully",
+                        "description": "Project created successfully.",
                         "content": {
                             "application/json": {
-                                "schemma": {
-                                    "type": "object",
+                                "schema": {
                                     "$ref": "#/components/schemas/Project"
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Please fill all fields"
                     }
                 }
             },
             "get": {
-                "summary": "Search all projects",
-                "description": "Route responsible for fetching all projects",
+                "summary": "List all projects",
+                "description": "Route responsible for listing all projects.",
                 "tags": [
-                    "Project"
-                ],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
+                    "Projects"
                 ],
                 "responses": {
-                    "400": {
-                        "description": "Projects not found"
-                    },
                     "200": {
+                        "description": "List of all projects.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -318,16 +269,19 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Projects not found."
                     }
                 }
             }
         },
         "/api/projects/{id}": {
             "get": {
-                "summary": "Search project by id",
-                "description": "Route responsible for searching for project by id",
+                "summary": "List project by ID",
+                "description": "Route responsible for listing a project by ID.",
                 "tags": [
-                    "Project"
+                    "Projects"
                 ],
                 "security": [
                     {
@@ -336,31 +290,36 @@
                 ],
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
-                        "type": "string",
+                        "in": "path",
+                        "required": true,
                         "description": "Project ID",
-                        "required": true
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
+                        "description": "Project found.",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
                                     "$ref": "#/components/schemas/Project"
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Project not found."
                     }
                 }
             },
             "patch": {
-                "summary": "Update project by id",
-                "description": "Route responsible for editing the project by id",
+                "summary": "Update project by ID",
+                "description": "Route responsible for updating a project.",
                 "tags": [
-                    "Project"
+                    "Projects"
                 ],
                 "security": [
                     {
@@ -369,11 +328,13 @@
                 ],
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
-                        "type": "string",
+                        "in": "path",
+                        "required": true,
                         "description": "Project ID",
-                        "required": true
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -383,52 +344,53 @@
                                 "$ref": "#/components/schemas/Project"
                             },
                             "examples": {
-                                "Project": {
+                                "example1": {
+                                    "summary": "Project Example",
                                     "value": {
-                                        "title": "My new project",
-                                        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                                        "title": "My Portfolio",
+                                        "description": "My personal portfolio",
                                         "technologies": [
-                                            "NodeJS",
                                             "ReactJS",
-                                            "React Native"
+                                            "NodeJS",
+                                            "MongoDB"
                                         ],
-                                        "link": "localhost:3000",
-                                        "image": "https://imgur.com/Ry1cb5M",
-                                        "createdAt": "2021-08-01T00:00:00.000Z",
-                                        "user": "611f4b3b5as34df25",
-                                        "likes": [],
-                                        "comments": []
+                                        "link": "www.djhonantanparreira.com",
+                                        "image": "https://www.djhonantanparreira.com/image.png"
                                     }
                                 }
                             }
                         }
-                    }
+                    },
+                    "required": [
+                        "title",
+                        "description",
+                        "technologies"
+                    ]
                 },
                 "responses": {
-                    "400": {
-                        "description": "Submit at least one field to update"
-                    },
-                    "403": {
-                        "description": "You are not allowed to update this project"
-                    },
                     "200": {
-                        "description": "Project updated",
+                        "description": "Project updated!",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
                                     "$ref": "#/components/schemas/Project"
                                 }
                             }
                         }
+                    },
+                    "403": {
+                        "description": "You are not allowed to update this project"
+                    },
+                    "400": {
+                        "description": "Please fill all fields!"
                     }
                 }
             },
             "delete": {
-                "summary": "Delete project by id",
-                "description": "Route responsible for deleting the project by id",
+                "summary": "Delete project by ID",
+                "description": "Route responsible for deleting a project.",
                 "tags": [
-                    "Project"
+                    "Projects"
                 ],
                 "security": [
                     {
@@ -437,19 +399,21 @@
                 ],
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
-                        "type": "string",
+                        "in": "path",
+                        "required": true,
                         "description": "Project ID",
-                        "required": true
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Project deleted!"
+                    },
                     "403": {
                         "description": "You are not allowed to delete this project"
-                    },
-                    "200": {
-                        "description": "Project deleted"
                     }
                 }
             }
@@ -457,9 +421,9 @@
         "/api/projects/like/{id}": {
             "patch": {
                 "summary": "Like a project or undo like",
-                "description": "Route responsible for liking a project or undoing the like",
+                "description": "Route responsible for liking a project or undoing the like.",
                 "tags": [
-                    "Project"
+                    "Projects"
                 ],
                 "security": [
                     {
@@ -468,180 +432,205 @@
                 ],
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
-                        "type": "string",
+                        "in": "path",
+                        "required": true,
                         "description": "Project ID",
-                        "required": true
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Project liked"
+                        "description": "Project liked!"
                     },
-                    "200": {
-                        "description": "Project unliked"
+                    "400": {
+                        "description": "Error liking project."
                     }
                 }
-            },
-            "/projects/comment/{id}": {
-                "patch": {
-                    "summary": "Comment on a project",
-                    "description": "Route responsible for commenting on a project",
-                    "tags": [
-                        "Project"
-                    ],
-                    "security": [
-                        {
-                            "bearerAuth": []
+            }
+        },
+        "/projects/comment/{id}": {
+            "patch": {
+                "summary": "Comment on a project",
+                "description": "Route responsible for commenting on a project.",
+                "tags": [
+                    "Projects"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Project ID",
+                        "schema": {
+                            "type": "string"
                         }
-                    ],
-                    "parameters": [
-                        {
-                            "in": "path",
-                            "name": "id",
-                            "type": "string",
-                            "description": "Project ID",
-                            "required": true
-                        }
-                    ],
-                    "requestBody": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Comment"
-                                },
-                                "examples": {
-                                    "Comment": {
-                                        "value": {
-                                            "message": "This project is amazing!"
-                                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Comment"
+                            },
+                            "examples": {
+                                "example1": {
+                                    "summary": "Comment Example",
+                                    "value": {
+                                        "message": "Great project!"
                                     }
                                 }
                             }
                         }
                     },
-                    "responses": {
-                        "400": {
-                            "description": "Write a message to comment!"
-                        },
-                        "200": {
-                            "description": "Comment added!"
-                        }
-                    }
-                }
-            },
-            "/projects/{idProject}/{idComment}": {
-                "patch": {
-                    "summary": "Delete comment on a project",
-                    "description": "Route responsible for deleting a comment on a project",
-                    "tags": [
-                        "Project"
-                    ],
-                    "security": [
-                        {
-                            "bearerAuth": []
-                        }
-                    ],
-                    "parameters": [
-                        {
-                            "in": "path",
-                            "name": "idProject",
-                            "type": "string",
-                            "description": "Project ID",
-                            "required": true
-                        },
-                        {
-                            "in": "path",
-                            "name": "idComment",
-                            "type": "string",
-                            "description": "Comment ID",
-                            "required": true
-                        }
-                    ],
-                    "responses": {
-                        "403": {
-                            "description": "You are not allowed to delete this comment"
-                        },
-                        "200": {
-                            "description": "Comment deleted"
-                        }
+                    "required": [
+                        "message"
+                    ]
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment added!"
+                    },
+                    "400": {
+                        "description": "Write a message to comment!"
                     }
                 }
             }
         },
-        "components": {
-            "securitySchemes": {
-                "bearerAuth": {
-                    "type": "http",
-                    "scheme": "bearer",
-                    "bearerFormat": "JWT"
+        "/projects/{idProject}/{idComment}": {
+            "patch": {
+                "summary": "Delete comment on a project",
+                "description": "Route responsible for deleting a comment on a project.",
+                "tags": [
+                    "Projects"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "idProject",
+                        "in": "path",
+                        "required": true,
+                        "description": "Project ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idComment",
+                        "in": "path",
+                        "required": true,
+                        "description": "Comment ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment deleted!"
+                    },
+                    "403": {
+                        "description": "You are not allowed to delete this comment"
+                    }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ]
             },
-            "schemas": {
-                "User": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
+            "Project": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "technologies": {
+                        "type": "array",
+                        "items": {
                             "type": "string"
-                        },
-                        "email": {
+                        }
+                    },
+                    "link": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "type": "string"
+                    },
+                    "likes": {
+                        "type": "array",
+                        "items": {
                             "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
+                        }
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
                         }
                     }
                 },
-                "Project": {
-                    "type": "object",
-                    "properties": {
-                        "title": {
-                            "type": "string"
-                        },
-                        "description": {
-                            "type": "string"
-                        },
-                        "technologies": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "image": {
-                            "type": "string"
-                        },
-                        "createdAt": {
-                            "type": "string"
-                        },
-                        "user": {
-                            "type": "string"
-                        },
-                        "likes": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "comments": {
-                            "type": "array",
-                            "items": {
-                                "type": "object"
-                            }
-                        }
+                "required": [
+                    "title",
+                    "description",
+                    "technologies"
+                ]
+            },
+            "Comment": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
                     }
                 },
-                "Comment": {
-                    "type": "object",
-                    "properties": {
-                        "message": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "required": [
+                    "message"
+                ]
             }
         }
     }
