@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import userRoute from './src/routes/user.route.js';
 import authRoute from './src/routes/auth.route.js';
 import projectRoute from './src/routes/project.route.js';
+import swaggerRoute from './src/routes/swagger.route.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/projects', projectRoute);
+app.use('/api/docs', swaggerRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
